@@ -17,7 +17,8 @@ impl CliCfg{
 
 
     pub fn new_flag(mut self, flag: String) -> CliCfg{
-        self.flags.push(flag);
+        self.flags.push(flag.clone());
+        self.provided_flags.insert(flag, false);
         self
     }
 
@@ -26,52 +27,13 @@ impl CliCfg{
         for arg in us_arguments{
             if self.flags.contains(&arg){
                 println!("flag provided {}",arg);
-                if arg == "-a"{
-                    self.provided_flags.insert(arg, false);
-                    println!("how it's going?")
+                if self.provided_flags.contains_key(&arg){
+                    *self.provided_flags.get_mut(&arg).unwrap() = true;
                 }
                 
                 
-                     
-            } else if self.flags.contains(&arg) == false{
-                println!("Error")
             }
         }
-
     }
-
 }
 
-
-    
-
-// }
-// #[derive(Debug)]
-// struct Circle {
-//     x: u64,
-//     y: u64,
-//     radius: u64
-// }
-// impl Circle {
-//     fn new(oneside: u64, secondside: u64, r: u64) -> Circle {
-//         Circle {
-//             x:oneside,
-//             y:secondside,
-//             radius: r
-//         }
-//     }
-//     fn area(&self) ->u64 {
-//         3 * (self.radius * self.radius)
-//     }
-    
-//     fn set_rad(&mut self, r: u64) {
-//         self.radius = r;
-//     }
-// }
-// pub fn proj(){
-    
-    // let kva = Circle::new(2,3,4);
-    
-    // println!("{}", kva.x)
-    
-    // }
