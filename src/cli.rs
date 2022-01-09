@@ -25,23 +25,26 @@ impl CliCfg{
     pub fn parse(&mut self) {
         let arguments:Vec<String> = std::env::args().collect();
         let our_flag = arguments.last().unwrap();
+        let mut our_flags:Vec<String> = Vec::new();
+        for i in arguments.iter().skip(1){;
+            our_flags.push(i.to_string());
+        }
+        println!("{:?}", our_flags);
         our_flag.to_string();
-        println!("{:?}", our_flag);
-        if self.flags.contains(&our_flag){
-            println!("flag provided {}",our_flag);
-            *self.provided_flags.get_mut(&*our_flag).unwrap() = true;
-                
-        } else {
-            println!("Error!")
+        println!("{:?}", our_flags);
+        for i in our_flags{
+            if self.flags.contains(&i){
+                println!("flag provided {}",i);
+                *self.provided_flags.get_mut(&*i).unwrap() = true;
+
+            } else {
+                println!("Error!")
+        }
         }
     }
 
-    pub fn used_flags(self, a_flag: String) -> bool{
-        if self.provided_flags.contains_key(&a_flag){
-            true
-        } else {
-            false
-        }
+    pub fn is_flag_provided(self, a_flag: String) -> bool {
+        self.provided_flags.get(&a_flag).unwrap() == &true
     }
 
 }
