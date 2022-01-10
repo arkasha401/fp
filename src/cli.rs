@@ -26,7 +26,7 @@ impl CliCfg{
         let arguments:Vec<String> = std::env::args().collect();
         let our_flag = arguments.last().unwrap();
         let mut our_flags:Vec<String> = Vec::new();
-        for i in arguments.iter().skip(1){;
+        for i in arguments.iter().skip(1){
             our_flags.push(i.to_string());
         }
         println!("{:?}", our_flags);
